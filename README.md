@@ -35,6 +35,5 @@ Planned for later versions:
 
 ## Design documents
 
-- [System flowchart](docs/flowchart.png)
-- Eisenhower matrix and tech stack are in the design doc in `docs/`
+- Eisenhower matrix, system flowchart, and tech stack are in the design doc in `docs/`
 
