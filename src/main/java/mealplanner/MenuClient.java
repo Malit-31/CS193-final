@@ -7,6 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Map;
+import java.util.Scanner;
 
 public final class MenuClient {
     private static final URI ENDPOINT =
@@ -82,6 +83,12 @@ public final class MenuClient {
             System.exit(2);
             return;
         }
-        System.out.print(fetchMenuRawJson(args[0], args[1]));
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Are you vegetarian? (yes/no): ");
+        System.out.flush();
+        boolean vegetarianOnly = scanner.nextLine().equalsIgnoreCase("yes");
+
+        String menuJson = fetchMenuRawJson(args[0], args[1]);
+        System.out.print(VegetarianMenuFilter.filter(menuJson, vegetarianOnly));
     }
 }
