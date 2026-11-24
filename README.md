@@ -2,7 +2,16 @@
 
 A Java command-line tool that gets Purdue's daily dining menu, takes a users calorie/protein targets and any dietary restrictions, and tells you what to eat at each dining court + how many servings of each item.
 
-The menu client asks whether you are vegetarian. Answering `yes` removes menu items without Purdue's Vegetarian tag. Run `mvn test` to test the filter.
+Run `MenuPreferences` to enter your vegetarian preference and daily nutrition targets, then fetch today's menu for Earhart. Answering `yes` removes menu items without Purdue's Vegetarian tag; `no` prints all items. Menu items are displayed one per line with their meal and station, not as raw JSON.
+
+You can optionally provide a dining court and date:
+
+```powershell
+mvn compile
+java -cp "target\classes;$env:USERPROFILE\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar" mealplanner.MenuPreferences Earhart 2026-11-12
+```
+
+Run `mvn test` to test the vegetarian filter.
 
 ## Project goal
 

@@ -56,7 +56,7 @@ public final class MenuClient {
     }
 
     // gets the raw menu JSON for wtv court and date.
-    private static String fetchMenuRawJson(String diningCourt, String date)
+    public static String fetchMenuRawJson(String diningCourt, String date)
             throws IOException, InterruptedException {
         Map<String, Object> payload = Map.of(
                 "operationName", "getLocationMenu",
