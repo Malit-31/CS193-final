@@ -19,6 +19,9 @@ public final class MenuPrinter {
         for (JsonElement mealValue : meals) {
             JsonObject meal = mealValue.getAsJsonObject();
             String mealName = meal.get("name").getAsString();
+            if (!mealName.equalsIgnoreCase("Lunch") && !mealName.equalsIgnoreCase("Dinner")) {
+                continue;
+            }
             JsonArray stations = meal.getAsJsonArray("stations");
             for (JsonElement stationValue : stations) {
                 JsonObject station = stationValue.getAsJsonObject();

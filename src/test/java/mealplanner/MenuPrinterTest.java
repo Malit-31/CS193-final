@@ -6,6 +6,38 @@ import org.junit.jupiter.api.Test;
 
 class MenuPrinterTest {
     @Test
+    void printsLunchAndDinnerButNotBreakfast() {
+        String json = """
+                {
+                  "data": {
+                    "diningCourtByName": {
+                      "dailyMenu": {
+                        "meals": [
+                          {"name": "Breakfast", "stations": [{"name": "Grill", "items": [
+                            {"item": {"name": "Pancakes", "nutritionFacts": []}}
+                          ]}]},
+                          {"name": "Lunch", "stations": [{"name": "Grill", "items": [
+                            {"item": {"name": "Salad", "nutritionFacts": []}}
+                          ]}]},
+                          {"name": "Dinner", "stations": [{"name": "Grill", "items": [
+                            {"item": {"name": "Pasta", "nutritionFacts": []}}
+                          ]}]}
+                        ]
+                      }
+                    }
+                  }
+                }
+                """;
+
+        assertEquals(
+                "Lunch - Grill: Salad (Calories: unavailable, Protein: unavailable)"
+                        + System.lineSeparator()
+                        + "Dinner - Grill: Pasta (Calories: unavailable, Protein: unavailable)"
+                        + System.lineSeparator(),
+                MenuPrinter.formatFoodItems(json));
+    }
+
+    @Test
     void formatsItemsOnePerLineWithTheirMealAndStation() {
         String json = """
                 {
