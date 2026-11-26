@@ -14,8 +14,9 @@ public class MenuPreferences {
         }
 
         String diningCourt = args.length > 0 ? args[0] : "Earhart";
-        String date = args.length > 1 ? args[1]
-                : LocalDate.now(ZoneId.of("America/Indiana/Indianapolis")).toString();
+        //String date = args.length > 1 ? args[1]
+               // : LocalDate.now(ZoneId.of("America/Indiana/Indianapolis")).toString();
+        String date = "2026-11-12"; // hardcoded date for testing
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Are you vegetarian? (yes/no): ");

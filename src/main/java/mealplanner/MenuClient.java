@@ -37,6 +37,11 @@ public final class MenuClient {
                           isNutritionReady
                           itemId
                           name
+                          nutritionFacts {
+                            name
+                            label
+                            value
+                          }
                           traits {
                             name
                             svgIcon

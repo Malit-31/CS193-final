@@ -2,7 +2,7 @@
 
 A Java command-line tool that gets Purdue's daily dining menu, takes a users calorie/protein targets and any dietary restrictions, and tells you what to eat at each dining court + how many servings of each item.
 
-Run `MenuPreferences` to enter your vegetarian preference and daily nutrition targets, then fetch today's menu for Earhart. Answering `yes` removes menu items without Purdue's Vegetarian tag; `no` prints all items. Menu items are displayed one per line with their meal and station, not as raw JSON.
+Run `MenuPreferences` to enter your vegetarian preference and daily nutrition targets, then fetch today's menu for Earhart. Answering `yes` removes menu items without Purdue's Vegetarian tag; `no` prints all items. Each menu item is displayed with its meal, station, calories, protein, and serving size when provided by the API.
 
 You can optionally provide a dining court and date:
 

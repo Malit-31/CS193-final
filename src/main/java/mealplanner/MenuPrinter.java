@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.Locale;
 
 public final class MenuPrinter {
     private MenuPrinter() {
@@ -36,6 +37,9 @@ public final class MenuPrinter {
                             .append(stationName)
                             .append(": ")
                             .append(itemName)
+                            .append(" (")
+                            .append(formatNutrition(item))
+                            .append(")")
                             .append(System.lineSeparator());
                 }
             }
@@ -43,5 +47,39 @@ public final class MenuPrinter {
 
         return output.length() == 0 ? "No menu items found." + System.lineSeparator()
                 : output.toString();
+    }
+
+    private static String formatNutrition(JsonObject item) {
+        JsonElement factsValue = item.get("nutritionFacts");
+        if (factsValue == null || !factsValue.isJsonArray()) {
+            return "Calories: unavailable, Protein: unavailable";
+        }
+
+        String calories = "unavailable";
+        String protein = "unavailable";
+        String servingSize = null;
+        for (JsonElement factValue : factsValue.getAsJsonArray()) {
+            JsonObject fact = factValue.getAsJsonObject();
+            String name = fact.get("name").getAsString();
+            JsonElement value = fact.get("value");
+            if (name.equalsIgnoreCase("Calories") && value != null && value.isJsonPrimitive()) {
+                calories = formatAmount(value.getAsDouble()) + " kcal";
+            } else if (name.equalsIgnoreCase("Protein")
+                    && value != null && value.isJsonPrimitive()) {
+                protein = formatAmount(value.getAsDouble()) + " g";
+            } else if (name.equalsIgnoreCase("Serving Size")) {
+                JsonElement label = fact.get("label");
+                if (label != null && label.isJsonPrimitive() && !label.getAsString().isBlank()) {
+                    servingSize = label.getAsString();
+                }
+            }
+        }
+
+        String nutrition = "Calories: " + calories + ", Protein: " + protein;
+        return servingSize == null ? nutrition : nutrition + " per " + servingSize;
+    }
+
+    private static String formatAmount(double amount) {
+        return String.format(Locale.ROOT, "%.1f", amount);
     }
 }
